@@ -1,0 +1,19 @@
+{
+  "name": "rpg0035",
+  "version": "1.0.0",
+  "description": "Trabalho SOFTWARE SEM SEGURANÇA NÃO SERVE",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "André Carvalhal",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "crypto": "^1.0.1",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
