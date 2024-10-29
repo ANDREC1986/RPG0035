@@ -7,7 +7,7 @@ function generateToken(user) {
         id: user.username,
         role: user.perfil
     }  
-    const token = jwt.sign(payload, SECRET_KEY, {expiresIn: '1h'});
+    const token = jwt.sign(payload, SECRET_KEY, {expiresIn: '1m'});
     return token
 }
 

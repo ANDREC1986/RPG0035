@@ -4,7 +4,6 @@ const login = require('./UseCases/Login/login')
 const jwtAuth = require('./UseCases/JwtToken/jwtauth')
 const UserController = require('./Controller/UserController')
 const jwtDecode = require('./UseCases/JwtToken/jwtdecoder')
-const checkAdmin = new jwtAuth("admin")
 const { param, validationResult } = require('express-validator');
 
 const app = express()
@@ -16,7 +15,6 @@ app.listen(port, () => {
 })
 
 app.post('/api/auth/login', (req, res, next) => {
-  console.log("Connection Received")
   const credentials = req.body
   let token = login(credentials?.usuario, credentials?.password)
   if(token) {
@@ -29,8 +27,9 @@ app.get('/api/auth/unrestricted', (req, res, next) => {
   let userController = new UserController()
   let data = userController.findUserByUsername(decoded.id)
   res.status(200).json("Access Granted, user Data:"+JSON.stringify(data))
- }) // Passo 6, Novo endpoint para recuperação de dados do usúario não restrito ao admin
+}) // Passo 6, Novo endpoint para recuperação de dados do usúario não restrito ao admin
 
+const checkAdmin = new jwtAuth("admin")
 app.use(checkAdmin.run.bind(checkAdmin)) // Passo 5, Todos os endpoints a seguir só podem ser acessados com o token a nível de admin.
 
 app.get('/api/auth/restricted', (req, res, next) => {
@@ -74,7 +73,6 @@ class Repository{
     return [];
   }
 }
-
 
 function getContracts(empresa, inicio){
   const repository = new Repository();
